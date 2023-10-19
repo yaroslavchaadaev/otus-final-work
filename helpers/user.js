@@ -2,32 +2,36 @@ import supertest from 'supertest'
 import config from '../framework/config/config.js'
 import randomString from "../framework/fixtures/fixtures.js";
 
-const { baseURL } = config.baseURL
+const baseURL = config.baseURL
 
 const userOperations = {
-  async createUser() {
-    return await supertest(baseURL)
+  createUser: (userName, userPassword) => {
+    return supertest(baseURL)
       .post('/user/createWithArray')
       .set('Accept', 'application/json')
-      .send({
+      .send([{
         id: Date.now(),
-        username: randomString.username(),
+        username: userName,
         firstName: randomString.firstName(),
         lastName: randomString.lastName(),
         email: randomString.email(),
-        password: randomString.password(),
+        password: userPassword,
         phone: randomString.phoneNumber()
-      })
+      }])
   },
-  async getUserInfo (userName) {
+  getUserInfo: userName => {
     return supertest(baseURL)
       .get(`/user/${userName}`)
       .set('Accept', 'application/json')
   },
-  async deleteUser (userName) {
+  deleteUser: userName => {
     return supertest(baseURL)
       .delete(`/user/${userName}`)
       .set('Accept', 'application/json')
+  },
+  loginUser: (userName, userPassword) => {
+    return supertest(baseURL)
+      .get(`/user/login?username=${userName}&password=${userPassword}`)
   }
 }
 
