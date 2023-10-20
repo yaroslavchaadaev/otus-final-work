@@ -1,16 +1,17 @@
 import supertest from 'supertest'
 import config from '../framework/config/config.js'
 import randomString from "../framework/fixtures/fixtures.js";
+import { beforeAll } from "jest-circus";
 
 const baseURL = config.baseURL
 
 const userOperations = {
-  createUser: (userName, userPassword) => {
+  createUser: (id, userName, userPassword) => {
     return supertest(baseURL)
       .post('/user/createWithArray')
       .set('Accept', 'application/json')
       .send([{
-        id: Date.now(),
+        id: id,
         username: userName,
         firstName: randomString.firstName(),
         lastName: randomString.lastName(),
@@ -24,6 +25,20 @@ const userOperations = {
       .get(`/user/${userName}`)
       .set('Accept', 'application/json')
   },
+  updateUserInfo: (userName, userPassword, id, firstName, lastName) => {
+    return supertest(baseURL)
+      .put(`/user/${userName}`)
+      .set('Accept', 'application/json')
+      .send({
+        id: id,
+        username: userName,
+        firstName: firstName,
+        lastName: lastName,
+        email: randomString.email(),
+        password: userPassword,
+        phone: randomString.phoneNumber()
+      })
+  },
   deleteUser: userName => {
     return supertest(baseURL)
       .delete(`/user/${userName}`)
@@ -32,7 +47,7 @@ const userOperations = {
   loginUser: (userName, userPassword) => {
     return supertest(baseURL)
       .get(`/user/login?username=${userName}&password=${userPassword}`)
-  }
+  },
 }
 
 export default userOperations
