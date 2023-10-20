@@ -1,7 +1,6 @@
 import supertest from 'supertest'
 import config from '../framework/config/config.js'
-import randomString from "../framework/fixtures/fixtures.js";
-import { beforeAll } from "jest-circus";
+import randomString from "../framework/fixtures/fixtures.js"
 
 const baseURL = config.baseURL
 
@@ -43,11 +42,7 @@ const userOperations = {
     return supertest(baseURL)
       .delete(`/user/${userName}`)
       .set('Accept', 'application/json')
-  },
-  loginUser: (userName, userPassword) => {
-    return supertest(baseURL)
-      .get(`/user/login?username=${userName}&password=${userPassword}`)
-  },
+  }
 }
 
 export default userOperations

@@ -1,6 +1,7 @@
 import { describe, expect, it } from '@jest/globals'
 import userOperations from '../helpers/user.js'
 import randomString from '../framework/fixtures/fixtures.js'
+import authOperations from '../helpers/auth.js'
 import { beforeAll } from 'jest-circus'
 
 let id
@@ -48,7 +49,7 @@ describe('Операции работы с пользователем', () => {
     expect(res.body.password).toBe(userPassword)
   })
   it('Авторизация под созданным пользователем', async () => {
-    const res = await userOperations.loginUser(userName, userPassword)
+    const res = await authOperations.loginUser(userName, userPassword)
 
     expect(res.status).toBe(200)
 
@@ -98,5 +99,18 @@ describe('Операции работы с пользователем', () => {
 
     expect(res.body).toHaveProperty('type')
     expect(res.body.type).toBe('unknown')
+  })
+  it('Выход пользователя из системы', async () => {
+    const res = await authOperations.logoutUser()
+
+    expect(res.status).toBe(200)
+
+    expect(res.body).toHaveProperty('code')
+    expect(res.body.code).toBe(200)
+
+    expect(res.body).toHaveProperty('type')
+
+    expect(res.body).toHaveProperty('message')
+    expect(res.body.message).toBe('ok')
   })
 })
