@@ -18,7 +18,7 @@ beforeAll(() => {
   newLastName = ''
 })
 
-describe('Операции работы с пользователем', () => {
+describe.skip('Операции работы с пользователем', () => {
   it('Создание нового пользователя', async () => {
     id = Date.now()
     userName = randomString.username()

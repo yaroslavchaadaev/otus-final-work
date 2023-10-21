@@ -1,6 +1,6 @@
 import supertest from 'supertest'
 import config from '../framework/config/config.js'
-import randomString from "../framework/fixtures/fixtures.js"
+import randomString from '../framework/fixtures/fixtures.js'
 
 const baseURL = config.baseURL
 
@@ -9,15 +9,17 @@ const userOperations = {
     return supertest(baseURL)
       .post('/user/createWithArray')
       .set('Accept', 'application/json')
-      .send([{
-        id: id,
-        username: userName,
-        firstName: randomString.firstName(),
-        lastName: randomString.lastName(),
-        email: randomString.email(),
-        password: userPassword,
-        phone: randomString.phoneNumber()
-      }])
+      .send([
+        {
+          id: id,
+          username: userName,
+          firstName: randomString.firstName(),
+          lastName: randomString.lastName(),
+          email: randomString.email(),
+          password: userPassword,
+          phone: randomString.phoneNumber()
+        }
+      ])
   },
   getUserInfo: userName => {
     return supertest(baseURL)
@@ -41,7 +43,6 @@ const userOperations = {
   deleteUser: userName => {
     return supertest(baseURL)
       .delete(`/user/${userName}`)
-      .set('Accept', 'application/json')
   }
 }
 

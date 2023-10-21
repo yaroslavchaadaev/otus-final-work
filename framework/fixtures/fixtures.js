@@ -18,6 +18,17 @@ const randomString = {
   },
   phoneNumber: () => {
     return faker.phone.number()
+  },
+  animalKind: () => {
+    return faker.animal.type()
+  }
+}
+
+export const randomFile = {
+  photo: (category) => {
+    return faker.image.urlLoremFlickr({
+      category: category
+    })
   }
 }
 
