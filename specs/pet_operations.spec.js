@@ -1,6 +1,8 @@
 import { describe, expect, it } from '@jest/globals'
-import petOperations from "../helpers/pet.js";
-import { beforeAll } from "jest-circus";
+import petOperations from '../helpers/pet.js'
+import petStatuses from '../helpers/const_values.js'
+import randomString from '../framework/fixtures/fixtures.js'
+import { beforeAll } from 'jest-circus'
 
 let id
 
@@ -27,6 +29,9 @@ describe('Операции работы с домашним питомцем', (
 
     expect(res.body).toHaveProperty('tags')
     expect(res.body.tags).toEqual([])
+
+    expect(res.body).toHaveProperty('status')
+    expect(res.body.status).toEqual(petStatuses.availableStatus)
   })
   it('Получение информации о созданном домашнем питомце', async () => {
     const res = await petOperations.getPetInfo(id)
@@ -44,6 +49,31 @@ describe('Операции работы с домашним питомцем', (
 
     expect(res.body).toHaveProperty('tags')
     expect(res.body.tags).toEqual([])
+
+    expect(res.body).toHaveProperty('status')
+    expect(res.body.status).toEqual(petStatuses.availableStatus)
+  })
+  it('Обновление информации о домашнем питомце', async () => {
+    const newAnimalKind = randomString.animalKind()
+
+    const res = await petOperations.updatePetInfo(id, newAnimalKind)
+
+    expect(res.status).toBe(200)
+
+    expect(res.body).toHaveProperty('id')
+    expect(res.body.id).toBe(id)
+
+    expect(res.body).toHaveProperty('name')
+    expect(res.body.name).toBe(newAnimalKind)
+
+    expect(res.body).toHaveProperty('photoUrls')
+    expect(res.body.photoUrls).not.toBe('')
+
+    expect(res.body).toHaveProperty('tags')
+    expect(res.body.tags).toEqual([])
+
+    expect(res.body).toHaveProperty('status')
+    expect(res.body.status).toEqual(petStatuses.soldStatus)
   })
   it('Удаление информации о питомце', async () => {
     const res = await petOperations.deletePet(id)
@@ -57,5 +87,19 @@ describe('Операции работы с домашним питомцем', (
 
     expect(res.body).toHaveProperty('message')
     expect(res.body.message).toBe(`${id}`)
+  })
+  it('Получение информации об удаленном домашнем питомце', async () => {
+    const res = await petOperations.getPetInfo(id)
+
+    expect(res.status).toBe(404)
+
+    expect(res.body).toHaveProperty('code')
+    expect(res.body.code).toBe(1)
+
+    expect(res.body).toHaveProperty('type')
+    expect(res.body.type).toBe('error')
+
+    expect(res.body).toHaveProperty('message')
+    expect(res.body.message).toBe('Pet not found')
   })
 })

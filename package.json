@@ -5,7 +5,10 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "set \"NODE_OPTIONS=--experimental-vm-modules\" && cross-env DOTENV_CONFIG_PATH=./.env jest --setupFiles dotenv/config"
+    "test": "set \"NODE_OPTIONS=--experimental-vm-modules\" && cross-env DOTENV_CONFIG_PATH=./.env jest --setupFiles dotenv/config",
+    "test:users": "set \"NODE_OPTIONS=--experimental-vm-modules\" && cross-env DOTENV_CONFIG_PATH=./.env jest /specs/user_operations.spec.js --setupFiles dotenv/config",
+    "test:pets": "set \"NODE_OPTIONS=--experimental-vm-modules\" && cross-env DOTENV_CONFIG_PATH=./.env jest /specs/pet_operations.spec.js --setupFiles dotenv/config",
+    "lint:fix": "eslint . --fix --ignore-path .gitignore"
   },
   "author": "",
   "license": "ISC",

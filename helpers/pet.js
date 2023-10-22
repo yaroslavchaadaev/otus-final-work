@@ -1,7 +1,8 @@
 import supertest from 'supertest'
 import config from '../framework/config/config.js'
-import randomString from '../framework/fixtures/fixtures.js'
-import { randomFile } from '../framework/fixtures/fixtures.js'
+import randomString, { randomFile } from '../framework/fixtures/fixtures.js'
+
+import petStatuses from './const_values.js'
 
 const baseURL = config.baseURL
 
@@ -12,22 +13,30 @@ const petOperations = {
       .post('/pet')
       .set('Accept', 'application/json')
       .send({
-        id: id,
+        id,
         name: animalKind,
-        photoUrls: [`${randomFile.photo(animalKind)}`]
+        photoUrls: [`${randomFile.photo(animalKind)}`],
+        status: petStatuses.availableStatus
       })
   },
-  getPetInfo: (petID) => {
+  getPetInfo: petID => {
     return supertest(baseURL)
       .get(`/pet/${petID}`)
       .set('Accept', 'application/json')
   },
-  updatePetInfo: () => {
-    // ---
-  },
-  deletePet: (id) => {
+  updatePetInfo: (id, newAnimalKind) => {
     return supertest(baseURL)
-      .delete(`/pet/${id}`)
+      .put('/pet')
+      .set('Accept', 'application/json')
+      .send({
+        id,
+        name: newAnimalKind,
+        photoUrls: [`${randomFile.photo(newAnimalKind)}`],
+        status: petStatuses.soldStatus
+      })
+  },
+  deletePet: id => {
+    return supertest(baseURL).delete(`/pet/${id}`)
   }
 }
 

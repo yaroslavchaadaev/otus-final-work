@@ -25,9 +25,9 @@ const randomString = {
 }
 
 export const randomFile = {
-  photo: (category) => {
+  photo: category => {
     return faker.image.urlLoremFlickr({
-      category: category
+      category
     })
   }
 }

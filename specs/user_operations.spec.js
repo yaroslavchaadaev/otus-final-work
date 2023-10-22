@@ -100,6 +100,20 @@ describe('Операции работы с пользователем', () => {
     expect(res.body).toHaveProperty('type')
     expect(res.body.type).toBe('unknown')
   })
+  it('Получение информации об удаленном пользователе', async () => {
+    const res = await userOperations.getUserInfo(userName)
+
+    expect(res.status).toBe(404)
+
+    expect(res.body).toHaveProperty('code')
+    expect(res.body.code).toBe(1)
+
+    expect(res.body).toHaveProperty('type')
+    expect(res.body.type).toBe('error')
+
+    expect(res.body).toHaveProperty('message')
+    expect(res.body.message).toBe('User not found')
+  })
   it('Выход пользователя из системы', async () => {
     const res = await authOperations.logoutUser()
 

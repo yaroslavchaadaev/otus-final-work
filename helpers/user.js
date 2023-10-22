@@ -11,7 +11,7 @@ const userOperations = {
       .set('Accept', 'application/json')
       .send([
         {
-          id: id,
+          id,
           username: userName,
           firstName: randomString.firstName(),
           lastName: randomString.lastName(),
@@ -31,18 +31,17 @@ const userOperations = {
       .put(`/user/${userName}`)
       .set('Accept', 'application/json')
       .send({
-        id: id,
+        id,
         username: userName,
-        firstName: firstName,
-        lastName: lastName,
+        firstName,
+        lastName,
         email: randomString.email(),
         password: userPassword,
         phone: randomString.phoneNumber()
       })
   },
   deleteUser: userName => {
-    return supertest(baseURL)
-      .delete(`/user/${userName}`)
+    return supertest(baseURL).delete(`/user/${userName}`)
   }
 }
 

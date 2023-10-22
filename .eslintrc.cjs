@@ -5,11 +5,7 @@ module.exports = {
     'jest/globals': true
   },
   plugins: ['jest', 'prettier'],
-  extends: [
-    'plugin:prettier/recommended',
-    'standard',
-    'plugin:jasmine/recommended'
-  ],
+  extends: ['plugin:prettier/recommended', 'standard'],
   overrides: [
     {
       env: {
