@@ -42,9 +42,10 @@ jobs:
           Repository: ${{ github.repository }}
 
           See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
-    - name: Upload report
-      uses: actions/upload-artifact@v3
-      with: 
-        name: report
-        if-no-files-found: error
-        path: ./html-report
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v1
+      with:
+        path: './html-report'
+    - name: Deploy to Github Pages
+      id: deployment
+      uses: actions/deploy-pages@v1
