@@ -35,7 +35,14 @@ jobs:
       env:
         ENV_FILE: ${{ vars.ENV_FILE }}
     - run: npm run test
-    - name: Send report to Telegram
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v1
+      with:
+        path: './html-report'
+    - name: Deploy to Github Pages
+      id: deployment
+      uses: actions/deploy-pages@v2
+    - name: Send notification to Telegram
       uses: appleboy/telegram-action@master
       with:
         to: ${{ secrets.TELEGRAM_USER }}
@@ -47,10 +54,5 @@ jobs:
           Repository: ${{ github.repository }}
 
           See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
-    - name: Upload artifact
-      uses: actions/upload-pages-artifact@v1
-      with:
-        path: './html-report'
-    - name: Deploy to Github Pages
-      id: deployment
-      uses: actions/deploy-pages@v1
+
+          Link to report: ${{ secrets.LINK_REPORT }}
