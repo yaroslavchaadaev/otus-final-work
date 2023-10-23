@@ -1,6 +1,6 @@
 import supertest from 'supertest'
-import config from '../framework/config/config.js'
-import randomString from '../framework/fixtures/fixtures.js'
+import config from '../../config/config.js'
+import randomString from '../../fixtures/fixtures.js'
 
 const baseURL = config.baseURL
 

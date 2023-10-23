@@ -1,6 +1,6 @@
 import { describe, expect, it } from '@jest/globals'
-import petOperations from '../helpers/pet.js'
-import petStatuses from '../helpers/const_values.js'
+import petOperations from '../framework/services/helpers/pet.js'
+import petStatuses from '../framework/consts.js'
 import randomString from '../framework/fixtures/fixtures.js'
 import { beforeAll } from 'jest-circus'
 
@@ -31,7 +31,7 @@ describe('Операции работы с домашним питомцем', (
     expect(res.body.tags).toEqual([])
 
     expect(res.body).toHaveProperty('status')
-    expect(res.body.status).toEqual(petStatuses.availableStatus)
+    expect(res.body.status).toEqual(petStatuses.AVAILABLE)
   })
   it('Получение информации о созданном домашнем питомце', async () => {
     const res = await petOperations.getPetInfo(id)
@@ -51,7 +51,7 @@ describe('Операции работы с домашним питомцем', (
     expect(res.body.tags).toEqual([])
 
     expect(res.body).toHaveProperty('status')
-    expect(res.body.status).toEqual(petStatuses.availableStatus)
+    expect(res.body.status).toEqual(petStatuses.AVAILABLE)
   })
   it('Обновление информации о домашнем питомце', async () => {
     const newAnimalKind = randomString.animalKind()
@@ -73,7 +73,7 @@ describe('Операции работы с домашним питомцем', (
     expect(res.body.tags).toEqual([])
 
     expect(res.body).toHaveProperty('status')
-    expect(res.body.status).toEqual(petStatuses.soldStatus)
+    expect(res.body.status).toEqual(petStatuses.SOLD)
   })
   it('Удаление информации о питомце', async () => {
     const res = await petOperations.deletePet(id)

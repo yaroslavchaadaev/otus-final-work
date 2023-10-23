@@ -1,8 +1,8 @@
 import supertest from 'supertest'
-import config from '../framework/config/config.js'
-import randomString, { randomFile } from '../framework/fixtures/fixtures.js'
+import config from '../../config/config.js'
+import randomString, { randomFile } from '../../fixtures/fixtures.js'
 
-import petStatuses from './const_values.js'
+import petStatuses from '../../consts.js'
 
 const baseURL = config.baseURL
 
@@ -16,7 +16,7 @@ const petOperations = {
         id,
         name: animalKind,
         photoUrls: [`${randomFile.photo(animalKind)}`],
-        status: petStatuses.availableStatus
+        status: petStatuses.AVAILABLE
       })
   },
   getPetInfo: petID => {
@@ -32,7 +32,7 @@ const petOperations = {
         id,
         name: newAnimalKind,
         photoUrls: [`${randomFile.photo(newAnimalKind)}`],
-        status: petStatuses.soldStatus
+        status: petStatuses.SOLD
       })
   },
   deletePet: id => {

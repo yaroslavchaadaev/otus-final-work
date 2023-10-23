@@ -1,7 +1,7 @@
 import { describe, expect, it } from '@jest/globals'
-import userOperations from '../helpers/user.js'
+import userOperations from '../framework/services/helpers/user.js'
 import randomString from '../framework/fixtures/fixtures.js'
-import authOperations from '../helpers/auth.js'
+import authOperations from '../framework/services/helpers/auth.js'
 import { beforeAll } from 'jest-circus'
 
 let id
