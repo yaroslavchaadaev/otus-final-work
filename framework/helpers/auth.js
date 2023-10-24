@@ -1,5 +1,5 @@
 import supertest from 'supertest'
-import config from '../../config/config.js'
+import config from '../config/config.js'
 
 const baseURL = config.baseURL
 

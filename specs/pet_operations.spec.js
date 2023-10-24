@@ -1,5 +1,5 @@
 import { describe, expect, it } from '@jest/globals'
-import petOperations from '../framework/services/helpers/pet.js'
+import petOperations from '../framework/helpers/pet.js'
 import petStatuses from '../framework/consts.js'
 import randomString from '../framework/fixtures/fixtures.js'
 import { beforeAll } from 'jest-circus'

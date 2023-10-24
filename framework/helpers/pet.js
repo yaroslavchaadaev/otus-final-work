@@ -1,8 +1,8 @@
 import supertest from 'supertest'
-import config from '../../config/config.js'
-import randomString, { randomFile } from '../../fixtures/fixtures.js'
+import config from '../config/config.js'
+import randomString, { randomFile } from '../fixtures/fixtures.js'
 
-import petStatuses from '../../consts.js'
+import petStatuses from '../consts.js'
 
 const baseURL = config.baseURL
 
