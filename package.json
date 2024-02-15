@@ -17,8 +17,8 @@
     "@babel/preset-env": "^7.23.2",
     "@faker-js/faker": "^8.2.0",
     "@jest/globals": "^29.7.0",
-    "allure-jest": "^2.9.2",
-    "allure-js-commons": "^2.9.2",
+    "allure-jest": "^2.12.0",
+    "allure-js-commons": "^2.12.0",
     "babel-jest": "^29.7.0",
     "cross-env": "^7.0.3",
     "dotenv": "^16.3.1",
@@ -36,6 +36,7 @@
     "moment": "^2.29.4",
     "npm": "^10.2.0",
     "prettier": "^3.0.3",
-    "supertest": "^6.3.3"
+    "supertest": "^6.3.3",
+    "xmlbuilder": "^15.1.1"
   }
 }
